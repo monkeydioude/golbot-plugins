@@ -20,12 +20,12 @@ type alert struct {
 
 const (
 	ackMessage        = "Ok %s, j'te dirais !"
+	cancelMessage     = "Canceled %s alert, %s :ok_hand:"
 	tellMessage       = "Wesh %s"
 	tellMessageReason = ", %s"
 )
 
 func (a *alert) sleep() {
-	fmt.Println(a.duration.Seconds())
 	a.timer = time.NewTimer(a.duration)
 
 	a.session.ChannelMessageSend(a.emitter.ChannelID, fmt.Sprintf(ackMessage, a.emitter.Author.Mention()))
@@ -37,6 +37,13 @@ func init() {
 	golbot.AddCommand(&cmd{
 		alerts: make(map[string]map[string]*alert),
 	})
+}
+
+func getHourDuration(now time.Time, h int) time.Duration {
+	if h >= now.Hour() && h <= 23 {
+		return time.Duration((h - now.Hour()) * int(time.Hour))
+	}
+	return time.Duration((24 - now.Hour() + h) * int(time.Hour))
 }
 
 func getDuration(t string) time.Duration {
@@ -53,17 +60,14 @@ func getDuration(t string) time.Duration {
 		return 0
 	}
 
-	d := time.Duration(0)
-	if now.Hour() != h {
-		d = d + time.Duration((24-now.Hour()+h)*int(time.Hour))
-	}
+	d := getHourDuration(now, h)
 
 	m, err := strconv.Atoi(tParts[1])
 	if err != nil {
 		return 0
 	}
 
-	return d + time.Duration((m-now.Minute())*int(time.Minute))
+	return d + time.Duration((m-now.Minute())*int(time.Minute)-(now.Second()*int(time.Second)))
 }
 
 func errorMsg(s *discordgo.Session, m *discordgo.MessageCreate, msg string) golbot.KeepLooking {
@@ -79,6 +83,10 @@ func heyListen(s *discordgo.Session, m *discordgo.MessageCreate, reason string) 
 	}
 
 	s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("%s !", msg))
+}
+
+func cancelAlertMsg(s *discordgo.Session, m *discordgo.MessageCreate, time string) {
+	s.ChannelMessageSend(m.ChannelID, fmt.Sprintf(cancelMessage, time, m.Author.Mention()))
 }
 
 type cmd struct {
@@ -107,12 +115,14 @@ func (c *cmd) Do(s *discordgo.Session, m *discordgo.MessageCreate, p []string) g
 
 	if len(p) == 3 {
 		reason = strings.Trim(p[2], " ")
+	}
 
-		if reason == "cancel" {
-			c.cancelAlert(m.Author.ID, p[1])
+	if reason == "cancel" {
+		if c.cancelAlert(m.Author.ID, p[1]) == false {
 			return errorMsg(s, m, ":middle_finger::joy:")
 		}
-		reason = p[2]
+		cancelAlertMsg(s, m, p[1])
+		return false
 	}
 
 	duration := getDuration(p[1])
