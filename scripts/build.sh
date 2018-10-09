@@ -5,9 +5,7 @@ imports=
 
 for i in $(cd pkg && ls -d *);
 do
-    imports=$imports"_ \\\"$pkg\\/pkg\\/$i\\\"\n" 
+    imports=$imports"_ \\\"$pkg\\/pkg\\/$i\\\"\n\t" 
 done;
-
-echo $imports
 
 sed "s/#MODS#/$imports/;" plugins.go.tpl > plugins.go

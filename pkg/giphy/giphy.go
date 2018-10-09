@@ -1,4 +1,4 @@
-package commands
+package giphy
 
 import (
 	"encoding/json"
@@ -63,4 +63,8 @@ func (g *giphy) Do(s *discordgo.Session, m *discordgo.MessageCreate, p []string)
 
 	s.ChannelMessageSend(m.ChannelID, entity.Data[tools.RandUnixNano(n)].EmbedURL)
 	return false
+}
+
+func (g *giphy) GetHelp() string {
+	return "/gif, allows to search a gif through Giphy API"
 }

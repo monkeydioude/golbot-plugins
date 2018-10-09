@@ -5,3 +5,6 @@ import (
     #MODS#
 )
 
+func healthCheck() string {
+    return "OK"
+}
