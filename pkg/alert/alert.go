@@ -67,7 +67,10 @@ func getDuration(t string) time.Duration {
 		return 0
 	}
 
-	return d + time.Duration((m-now.Minute())*int(time.Minute)-(now.Second()*int(time.Second)))
+	md := time.Duration((m - now.Minute()) * int(time.Minute))
+	sd := time.Duration(now.Second() * int(time.Second))
+
+	return d + md - sd
 }
 
 func errorMsg(s *discordgo.Session, m *discordgo.MessageCreate, msg string) golbot.KeepLooking {
