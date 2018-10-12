@@ -21,7 +21,7 @@ type cmd struct {
 	alerts map[string]map[string]*alert
 }
 
-func AddCommand() *cmd {
+func AddCommand(g *golbot.Golbot) *cmd {
 	return &cmd{
 		alerts: make(map[string]map[string]*alert),
 	}

@@ -20,11 +20,13 @@ const (
 
 type giphy struct {
 	gophy *gophy.Gophy
+	bot   *golbot.Golbot
 }
 
-func AddCommand() *giphy {
+func AddCommand(g *golbot.Golbot) *giphy {
 	return &giphy{
 		gophy: gophy.NewGophy(apiKey),
+		bot:   g,
 	}
 }
 

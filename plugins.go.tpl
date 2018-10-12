@@ -11,7 +11,7 @@ func healthCheck() string {
 }
 
 
-func GetCommands() []golbot.Command {
+func GetCommands(g *golbot.Golbot) []golbot.Command {
     return []golbot.Command{
         #ADD_COMMAND#
     }
