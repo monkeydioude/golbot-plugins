@@ -22,15 +22,19 @@ type giphy struct {
 	gophy *gophy.Gophy
 }
 
-func init() {
-	golbot.AddCommand(&giphy{
+func AddCommand() *giphy {
+	return &giphy{
 		gophy: gophy.NewGophy(apiKey),
-	})
+	}
 }
 
 // GetRegex implements golbot.Command interface
 func (g *giphy) GetRegex() string {
 	return "/gif (.+)"
+}
+
+func (g *giphy) GetName() string {
+	return "gif"
 }
 
 // Do implements golbot.Command interface
