@@ -12,7 +12,6 @@ func healthCheck() string {
     return "OK"
 }
 
-
 func GetCommands(g *golbot.Golbot) []golbot.Command {
     return []golbot.Command{
         alert.AddCommand(g),

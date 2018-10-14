@@ -7,6 +7,7 @@ commands=
 for i in $(cd pkg && ls -d *);
 do
     imports=$imports"\\\"$pkg\\/pkg\\/$i\\\"\n\t" 
+    # commands=$commands$i.AddCommand\(g,\ g.NewCache\(\"$i\"\)\),"\n\t\t"
     commands=$commands$i.AddCommand\(g\),"\n\t\t"
 done;
 
