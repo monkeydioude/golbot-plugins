@@ -1,8 +1,4 @@
 [[constraint]]
-  name = "bitbucket.org/drannoc/golbot"
-  branch = "master"
-
-[[constraint]]
   name = "github.com/bwmarrin/discordgo"
   version = "0.18.0"
 

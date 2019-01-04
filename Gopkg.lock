@@ -2,10 +2,10 @@
 
 
 [[projects]]
-  branch = "master"
   name = "bitbucket.org/drannoc/golbot"
   packages = ["."]
-  revision = "2d4f6cf045372a529d94496173d843a236bfcf50"
+  revision = "cdd72a7a2e4d3fe3c58638834baf1a1b9db279c5"
+  version = "v1.0.0"
 
 [[projects]]
   name = "github.com/bwmarrin/discordgo"
@@ -115,6 +115,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "7b267ef8158b85ecc86efafbede0252c488b33fb8c323e51df87aaf8715730bb"
+  inputs-digest = "a5c0549d92d41530a3b9463a466ece7a400cd48a0a29fc81e2634a65a14f0328"
   solver-name = "gps-cdcl"
   solver-version = 1
