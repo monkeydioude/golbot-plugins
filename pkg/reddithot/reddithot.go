@@ -11,12 +11,14 @@ import (
 )
 
 type redditHot struct {
-	hot *lgtR.Hot
+	hot     *lgtR.Hot
+	subList map[string]*lgtR.Watcher
 }
 
 func AddCommand(g *golbot.Golbot, cachePath string) *redditHot {
 	return &redditHot{
-		hot: lgtR.New(cachePath, 5*time.Second),
+		hot:     lgtR.New(cachePath, 5*time.Second),
+		subList: make(map[string]*lgtR.Watcher),
 	}
 }
 
@@ -39,13 +41,20 @@ func (r *redditHot) getFunctionMap() map[string]action {
 }
 
 func (r *redditHot) addSub(sub string, s *discordgo.Session, m *discordgo.MessageCreate) {
-	r.hot.WatchMe(sub, func(p *reddit.Post) {
+	s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Stalker le sub '%s' fait partie du keikaki !", sub))
+	r.subList[sub] = r.hot.WatchMe(sub, func(p *reddit.Post) {
 		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("**[%s]** %s \n%s", sub, p.Title, p.URL))
 	})
 }
 
 func (r *redditHot) rmSub(sub string, s *discordgo.Session, m *discordgo.MessageCreate) {
+	if _, ok := r.subList[sub]; !ok {
+		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Le sub '%s' n'est pas stalke !", sub))
+		return
+	}
 
+	r.subList[sub].Cancel()
+	s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("JA-JA-J'arrete de stalker le sub '%s' !", sub))
 }
 
 func (r *redditHot) Do(s *discordgo.Session, m *discordgo.MessageCreate, p []string) golbot.KeepLooking {
