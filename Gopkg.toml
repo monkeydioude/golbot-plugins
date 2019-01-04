@@ -1,6 +1,6 @@
 [[constraint]]
   name = "bitbucket.org/drannoc/golbot"
-  version = "1.0.0"
+  branch = "master"
 
 [[constraint]]
   name = "github.com/bwmarrin/discordgo"

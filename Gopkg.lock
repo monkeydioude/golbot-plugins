@@ -2,10 +2,10 @@
 
 
 [[projects]]
+  branch = "master"
   name = "bitbucket.org/drannoc/golbot"
   packages = ["."]
-  revision = "cdd72a7a2e4d3fe3c58638834baf1a1b9db279c5"
-  version = "v1.0.0"
+  revision = "2d4f6cf045372a529d94496173d843a236bfcf50"
 
 [[projects]]
   name = "github.com/bwmarrin/discordgo"
@@ -42,9 +42,16 @@
   revision = "285ede71c2950331bf31e269f739c59069b71fec"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/monkeydioude/lgtR"
+  packages = ["."]
+  revision = "f731a25cd247953eec64807c80c3473aea75521e"
+
+[[projects]]
   name = "github.com/monkeydioude/tools"
   packages = [
     ".",
+    "cache",
     "http"
   ]
   revision = "3ca37c51e9de7d625aef7a266741a75ef1ef8f17"
@@ -53,14 +60,7 @@
 [[projects]]
   branch = "master"
   name = "github.com/turnage/graw"
-  packages = [
-    ".",
-    "botfaces",
-    "reddit",
-    "streams",
-    "streams/internal/monitor",
-    "streams/internal/rsort"
-  ]
+  packages = ["reddit"]
   revision = "15877a6c18d60f0ad1336c3d44fb59e95c3e6b40"
 
 [[projects]]
@@ -78,7 +78,7 @@
     "poly1305",
     "salsa20/salsa"
   ]
-  revision = "505ab145d0a99da450461ae2c1a9f6cd10d1f447"
+  revision = "ff983b9c42bc9fbf91556e191cc8efb585c16908"
 
 [[projects]]
   branch = "master"
@@ -115,6 +115,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "02c5dc483a2d168965ec23f1d4215311ddec505ff9c6a868ca9bb4aef38e9fc4"
+  inputs-digest = "7b267ef8158b85ecc86efafbede0252c488b33fb8c323e51df87aaf8715730bb"
   solver-name = "gps-cdcl"
   solver-version = 1
