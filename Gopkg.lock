@@ -54,8 +54,8 @@
     "cache",
     "http"
   ]
-  revision = "3ca37c51e9de7d625aef7a266741a75ef1ef8f17"
-  version = "2.3.0"
+  revision = "9cf139acb9b440aaa5e9c8abbc0bd04bc3133e34"
+  version = "2.4.0"
 
 [[projects]]
   branch = "master"
@@ -115,6 +115,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "a5c0549d92d41530a3b9463a466ece7a400cd48a0a29fc81e2634a65a14f0328"
+  inputs-digest = "23eb593f9b474be4a5ba8fc6885715f3afe26f06a56ab1ce46e3b7159ce7107c"
   solver-name = "gps-cdcl"
   solver-version = 1
