@@ -23,7 +23,7 @@ type giphy struct {
 	bot   *golbot.Golbot
 }
 
-func AddCommand(g *golbot.Golbot) *giphy {
+func AddCommand(g *golbot.Golbot, cachePath string) *giphy {
 	return &giphy{
 		gophy: gophy.NewGophy(apiKey),
 		bot:   g,

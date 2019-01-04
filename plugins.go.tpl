@@ -10,7 +10,7 @@ func healthCheck() string {
     return "OK"
 }
 
-func GetCommands(g *golbot.Golbot) []golbot.Command {
+func GetCommands(g *golbot.Golbot, cachePath string) []golbot.Command {
     return []golbot.Command{
         #ADD_COMMAND#
     }

@@ -1,0 +1,23 @@
+[[constraint]]
+  name = "bitbucket.org/drannoc/golbot"
+  version = "1.0.0"
+
+[[constraint]]
+  name = "github.com/bwmarrin/discordgo"
+  version = "0.18.0"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/monkeydioude/gophy"
+
+[[constraint]]
+  name = "github.com/monkeydioude/tools"
+  version = "2.3.0"
+
+[prune]
+  go-tests = true
+  unused-packages = true
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/turnage/graw"
