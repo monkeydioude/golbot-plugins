@@ -17,7 +17,7 @@ type redditHot struct {
 
 func AddCommand(g *golbot.Golbot, cachePath string) *redditHot {
 	return &redditHot{
-		hot:     lgtR.New(cachePath, 5*time.Second),
+		hot:     lgtR.New(cachePath, 2*time.Minute),
 		subList: make(map[string]*lgtR.Watcher),
 	}
 }
@@ -41,7 +41,7 @@ func (r *redditHot) getFunctionMap() map[string]action {
 }
 
 func (r *redditHot) addSub(sub string, s *discordgo.Session, m *discordgo.MessageCreate) {
-	s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Stalker le sub '%s' fait partie du keikaki !", sub))
+	s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Stalker le sub '%s' fait partie du keikaku !", sub))
 	r.subList[sub] = r.hot.WatchMe(sub, func(p *reddit.Post) {
 		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("**[%s]** %s \n%s", sub, p.Title, p.URL))
 	})
