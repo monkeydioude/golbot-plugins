@@ -76,5 +76,5 @@ func (r *redditHot) GetHelp() string {
 }
 
 func (r *redditHot) GetName() string {
-	return "lgtR"
+	return "redditHot"
 }
