@@ -35,19 +35,26 @@ func (r *redditHot) getFunctionMap() map[string]action {
 }
 
 func (r *redditHot) addSub(sub string, s *discordgo.Session, m *discordgo.MessageCreate) {
+	subID := m.ChannelID + sub
+	if _, ok := r.subList[subID]; ok {
+		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Le sub '%s' est deja stalke !", sub))
+		return
+	}
 	s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Stalker le sub '%s' fait partie du keikaku !", sub))
-	r.subList[sub] = r.hot.WatchMe(sub, func(p *reddit.Post) {
+	r.subList[subID] = r.hot.WatchMe(sub, func(p *reddit.Post) {
 		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("**[%s]** %s \n%s", sub, p.Title, p.URL))
 	})
 }
 
 func (r *redditHot) rmSub(sub string, s *discordgo.Session, m *discordgo.MessageCreate) {
-	if _, ok := r.subList[sub]; !ok {
+	subID := m.ChannelID + sub
+	if _, ok := r.subList[subID]; !ok {
 		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Le sub '%s' n'est pas stalke !", sub))
 		return
 	}
 
-	r.subList[sub].Cancel()
+	r.subList[subID].Cancel()
+	delete(r.subList, subID)
 	s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("JA-JA-J'arrete de stalker le sub '%s' !", sub))
 }
 
