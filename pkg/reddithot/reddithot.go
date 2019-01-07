@@ -17,15 +17,10 @@ type redditHot struct {
 
 func AddCommand(g *golbot.Golbot, cachePath string) *redditHot {
 	return &redditHot{
-		hot:     lgtR.New(cachePath, 2*time.Minute),
+		hot:     lgtR.New(cachePath, 5*time.Second),
 		subList: make(map[string]*lgtR.Watcher),
 	}
 }
-
-// GetRegex() string
-// Do(*discordgo.Session, *discordgo.MessageCreate, []string) KeepLooking
-// GetHelp() string
-// GetName() string
 
 type action func(string, *discordgo.Session, *discordgo.MessageCreate)
 
