@@ -72,5 +72,5 @@ func (g *giphy) Do(s *discordgo.Session, m *discordgo.MessageCreate, p []string)
 }
 
 func (g *giphy) GetHelp() string {
-	return "/gif, allows to search a gif through Giphy API"
+	return "/gif [term], allows to search a gif through Giphy API"
 }

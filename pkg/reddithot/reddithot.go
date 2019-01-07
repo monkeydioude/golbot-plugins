@@ -67,7 +67,7 @@ func (r *redditHot) Do(s *discordgo.Session, m *discordgo.MessageCreate, p []str
 }
 
 func (r *redditHot) GetHelp() string {
-	return "/hot [add|rm] allows to mirrors/remove hot section of a subreddit"
+	return "/hot [add|rm] allows to mirrors/remove hot post of a subbreddit (ex: /hot add shitpostcrusaders)"
 }
 
 func (r *redditHot) GetName() string {

@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	ackMessage        = "Ok %s, j'te dirais !"
+	ackMessage        = "Ok %s, I'll tell you !"
 	cancelMessage     = "Canceled %s alert, %s :ok_hand:"
 	tellMessage       = "Wesh %s"
 	tellMessageReason = ", %s"
@@ -78,7 +78,7 @@ func (c *cmd) Do(s *discordgo.Session, m *discordgo.MessageCreate, p []string) g
 }
 
 func (c *cmd) GetHelp() string {
-	return `Alert creates a reminding at the next specified time. Usage:
+	return `Alert creates a reminder alert at the next specified time. Usage:
 		* */alert 16:30 snack time* <= create a reminder to eat a snack
 		* */alert 16:30 cancel* <= cancel the previously snack time reminder`
 }
