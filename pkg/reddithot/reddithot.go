@@ -17,7 +17,7 @@ type redditHot struct {
 
 func AddCommand(g *golbot.Golbot, cachePath string) *redditHot {
 	return &redditHot{
-		hot:     lgtR.New(cachePath, 5*time.Second),
+		hot:     lgtR.New(cachePath, 2*time.Minute),
 		subList: make(map[string]*lgtR.Watcher),
 	}
 }
