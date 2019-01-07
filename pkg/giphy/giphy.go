@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"net/url"
 
-	"bitbucket.org/drannoc/golbot"
 	"github.com/bwmarrin/discordgo"
 	"github.com/monkeydioude/gophy"
 	"github.com/monkeydioude/gophy/pkg/entity"
@@ -20,13 +19,11 @@ const (
 
 type giphy struct {
 	gophy *gophy.Gophy
-	bot   *golbot.Golbot
 }
 
-func AddCommand(g *golbot.Golbot, cachePath string) *giphy {
+func AddCommand(cachePath string) *giphy {
 	return &giphy{
 		gophy: gophy.NewGophy(apiKey),
-		bot:   g,
 	}
 }
 
@@ -40,9 +37,9 @@ func (g *giphy) GetName() string {
 }
 
 // Do implements golbot.Command interface
-func (g *giphy) Do(s *discordgo.Session, m *discordgo.MessageCreate, p []string) golbot.KeepLooking {
+func (g *giphy) Do(s *discordgo.Session, m *discordgo.MessageCreate, p []string) error {
 	if len(p) < 2 {
-		return false
+		return nil
 	}
 
 	res, err := g.gophy.Request(&request.Search{
@@ -50,25 +47,25 @@ func (g *giphy) Do(s *discordgo.Session, m *discordgo.MessageCreate, p []string)
 		Limit: searchLimit,
 	})
 	if err != nil {
-		return false
+		return nil
 	}
 
 	var entity entity.Gifs
 
 	err = json.Unmarshal(res, &entity)
 	if err != nil {
-		return false
+		return nil
 	}
 
 	n := int64(len(entity.Data))
 
 	if n == 0 {
 		s.ChannelMessageSend(m.ChannelID, notFoundMsg)
-		return false
+		return nil
 	}
 
 	s.ChannelMessageSend(m.ChannelID, entity.Data[tools.RandUnixNano(n)].EmbedURL)
-	return false
+	return nil
 }
 
 func (g *giphy) GetHelp() string {

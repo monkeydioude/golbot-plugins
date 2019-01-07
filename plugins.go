@@ -13,11 +13,11 @@ func healthCheck() string {
     return "OK"
 }
 
-func GetCommands(g *golbot.Golbot, cachePath string) []golbot.Command {
+func GetCommands(cachePath string) []golbot.Command {
     return []golbot.Command{
-        alert.AddCommand(g,cachePath+"alert/"),
-		giphy.AddCommand(g,cachePath+"giphy/"),
-		reddithot.AddCommand(g,cachePath+"reddithot/"),
+        alert.AddCommand(cachePath+"alert/"),
+		giphy.AddCommand(cachePath+"giphy/"),
+		reddithot.AddCommand(cachePath+"reddithot/"),
 		
     }
 }

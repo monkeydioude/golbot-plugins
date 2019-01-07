@@ -6,7 +6,6 @@ import (
 	"strings"
 	"time"
 
-	"bitbucket.org/drannoc/golbot"
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -21,7 +20,7 @@ type cmd struct {
 	alerts map[string]map[string]*alert
 }
 
-func AddCommand(g *golbot.Golbot, cachePath string) *cmd {
+func AddCommand(cachePath string) *cmd {
 	return &cmd{
 		alerts: make(map[string]map[string]*alert),
 	}
@@ -35,9 +34,9 @@ func (c *cmd) GetName() string {
 	return "alert"
 }
 
-func (c *cmd) Do(s *discordgo.Session, m *discordgo.MessageCreate, p []string) golbot.KeepLooking {
+func (c *cmd) Do(s *discordgo.Session, m *discordgo.MessageCreate, p []string) error {
 	if len(p) < 2 {
-		return false
+		return nil
 	}
 	var reason string
 
@@ -50,14 +49,14 @@ func (c *cmd) Do(s *discordgo.Session, m *discordgo.MessageCreate, p []string) g
 			return errorMsg(s, m, ":middle_finger::joy:")
 		}
 		cancelAlertMsg(s, m, p[1])
-		return false
+		return nil
 	}
 
 	duration := getDuration(p[1])
 
 	if duration == 0 {
 		heyListen(s, m, reason)
-		return false
+		return nil
 	}
 
 	a := &alert{
@@ -73,8 +72,7 @@ func (c *cmd) Do(s *discordgo.Session, m *discordgo.MessageCreate, p []string) g
 		c.alerts[m.Author.ID] = make(map[string]*alert)
 	}
 	c.alerts[m.Author.ID][p[1]] = a
-
-	return false
+	return nil
 }
 
 func (c *cmd) GetHelp() string {
@@ -143,9 +141,9 @@ func getDuration(t string) time.Duration {
 	return d + md - sd
 }
 
-func errorMsg(s *discordgo.Session, m *discordgo.MessageCreate, msg string) golbot.KeepLooking {
+func errorMsg(s *discordgo.Session, m *discordgo.MessageCreate, msg string) error {
 	s.ChannelMessageSend(m.ChannelID, msg)
-	return false
+	return nil
 }
 
 func heyListen(s *discordgo.Session, m *discordgo.MessageCreate, reason string) {

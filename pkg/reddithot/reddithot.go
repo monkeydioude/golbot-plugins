@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"time"
 
-	"bitbucket.org/drannoc/golbot"
 	"github.com/bwmarrin/discordgo"
 	"github.com/monkeydioude/lgtR"
 	"github.com/turnage/graw/reddit"
@@ -15,7 +14,7 @@ type redditHot struct {
 	subList map[string]*lgtR.Watcher
 }
 
-func AddCommand(g *golbot.Golbot, cachePath string) *redditHot {
+func AddCommand(cachePath string) *redditHot {
 	return &redditHot{
 		hot:     lgtR.New(cachePath, 2*time.Minute),
 		subList: make(map[string]*lgtR.Watcher),
@@ -52,18 +51,18 @@ func (r *redditHot) rmSub(sub string, s *discordgo.Session, m *discordgo.Message
 	s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("JA-JA-J'arrete de stalker le sub '%s' !", sub))
 }
 
-func (r *redditHot) Do(s *discordgo.Session, m *discordgo.MessageCreate, p []string) golbot.KeepLooking {
+func (r *redditHot) Do(s *discordgo.Session, m *discordgo.MessageCreate, p []string) error {
 	if len(p) < 3 {
-		return false
+		return nil
 	}
 
 	funcs := r.getFunctionMap()
 	if _, ok := funcs[p[1]]; ok {
 		funcs[p[1]](p[2], s, m)
-		return false
+		return nil
 	}
 
-	return false
+	return nil
 }
 
 func (r *redditHot) GetHelp() string {
