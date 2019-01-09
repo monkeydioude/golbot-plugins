@@ -43,7 +43,7 @@ func getEmbedMessage(sub string, p *reddit.Post) *discordgo.MessageEmbed {
 		Fields: []*discordgo.MessageEmbedField{
 			&discordgo.MessageEmbedField{
 				Name:  fmt.Sprintf("**[%s]**", sub),
-				Value: fmt.Sprintf("[%s](https://reddit.com%s)", p.Title, p.Permalink),
+				Value: fmt.Sprintf("[%s](https://www.reddit.com%s)", p.Title, p.Permalink),
 			},
 		},
 	}
