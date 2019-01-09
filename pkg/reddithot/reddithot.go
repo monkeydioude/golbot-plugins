@@ -2,6 +2,7 @@ package reddithot
 
 import (
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/bwmarrin/discordgo"
@@ -16,7 +17,7 @@ type redditHot struct {
 
 func AddCommand(cachePath string) *redditHot {
 	return &redditHot{
-		hot:     lgtR.New(cachePath, 2*time.Minute),
+		hot:     lgtR.New(cachePath, 5*time.Minute),
 		subList: make(map[string]*lgtR.Watcher),
 	}
 }
@@ -34,6 +35,20 @@ func (r *redditHot) getFunctionMap() map[string]action {
 	}
 }
 
+func getEmbedMessage(sub string, p *reddit.Post) *discordgo.MessageEmbed {
+	return &discordgo.MessageEmbed{
+		Image: &discordgo.MessageEmbedImage{
+			URL: p.URL,
+		},
+		Fields: []*discordgo.MessageEmbedField{
+			&discordgo.MessageEmbedField{
+				Name:  fmt.Sprintf("**[%s]**", sub),
+				Value: fmt.Sprintf("[%s](https://reddit.com%s)", p.Title, p.Permalink),
+			},
+		},
+	}
+}
+
 func (r *redditHot) addSub(sub string, s *discordgo.Session, m *discordgo.MessageCreate) {
 	subID := m.ChannelID + sub
 	if _, ok := r.subList[subID]; ok {
@@ -42,7 +57,14 @@ func (r *redditHot) addSub(sub string, s *discordgo.Session, m *discordgo.Messag
 	}
 	s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Stalker le sub '%s' fait partie du keikaku !", sub))
 	r.subList[subID] = r.hot.WatchMe(sub, func(p *reddit.Post) {
-		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("**[%s]** %s \n%s", sub, p.Title, p.URL))
+		if p.IsSelf {
+			return
+		}
+		_, err := s.ChannelMessageSendEmbed(m.ChannelID, getEmbedMessage(sub, p))
+
+		if err != nil {
+			log.Printf("[ERR ] Could not send embed message. Reason: %s", err)
+		}
 	})
 }
 
