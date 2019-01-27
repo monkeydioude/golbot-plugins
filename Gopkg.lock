@@ -45,7 +45,7 @@
   branch = "master"
   name = "github.com/monkeydioude/lgtR"
   packages = ["."]
-  revision = "c91bee20d83dd7ab2490366ceaa94c8e8b9a3ac5"
+  revision = "fabf1e5a081fb8d7663c2aafeff42cb2334eb50a"
 
 [[projects]]
   name = "github.com/monkeydioude/tools"
@@ -78,7 +78,7 @@
     "poly1305",
     "salsa20/salsa"
   ]
-  revision = "ff983b9c42bc9fbf91556e191cc8efb585c16908"
+  revision = "057139ce5d2bdbe6fe73c53679e24e9cf007f637"
 
 [[projects]]
   branch = "master"
@@ -87,7 +87,7 @@
     "context",
     "context/ctxhttp"
   ]
-  revision = "1a61f4433d8505ec66450dd581f6abb8e83cb4d9"
+  revision = "d26f9f9a57f3fab6a695bec0d84433c2c50f8bbf"
 
 [[projects]]
   branch = "master"
@@ -96,7 +96,7 @@
     ".",
     "internal"
   ]
-  revision = "d668ce993890a79bda886613ee587a69dd5da7a6"
+  revision = "5dab4167f31cbd76b407f1486c86b40748bc5073"
 
 [[projects]]
   name = "google.golang.org/appengine"
