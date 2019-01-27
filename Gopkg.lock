@@ -45,7 +45,7 @@
   branch = "master"
   name = "github.com/monkeydioude/lgtR"
   packages = ["."]
-  revision = "24b7418298262660f7f59151e6490d7777bfe029"
+  revision = "545a77c2c0398929d213f314cdb2eb82869acd58"
 
 [[projects]]
   name = "github.com/monkeydioude/tools"
