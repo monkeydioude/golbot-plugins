@@ -12,13 +12,13 @@ import (
 
 type redditHot struct {
 	hot     *lgtR.Hot
-	subList map[string]*lgtR.Watcher
+	subList map[string]map[string]*lgtR.Watcher
 }
 
 func AddCommand(cachePath string) *redditHot {
 	return &redditHot{
 		hot:     lgtR.New(cachePath, (2*time.Minute + 30*time.Second)),
-		subList: make(map[string]*lgtR.Watcher),
+		subList: make(map[string]map[string]*lgtR.Watcher),
 	}
 }
 
@@ -50,13 +50,13 @@ func getEmbedMessage(sub string, p *reddit.Post) *discordgo.MessageEmbed {
 }
 
 func (r *redditHot) addSub(sub string, s *discordgo.Session, m *discordgo.MessageCreate) {
-	subID := m.ChannelID + sub
-	if _, ok := r.subList[subID]; ok {
-		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Le sub '%s' est deja stalke !", sub))
+	// subID := m.ChannelID + sub
+	if _, ok := r.subList[m.ChannelID][sub]; ok {
+		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Info: Sub '%s' is already being stalked.", sub))
 		return
 	}
-	s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Stalker le sub '%s' fait partie du keikaku !", sub))
-	r.subList[subID] = r.hot.WatchMe(sub, func(p *reddit.Post) {
+	s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Info: Stalking sub '%s' is now part of the keikaku.", sub))
+	r.subList[m.ChannelID][sub] = r.hot.WatchMe(sub, func(p *reddit.Post) {
 		if p.IsSelf {
 			return
 		}
@@ -69,15 +69,14 @@ func (r *redditHot) addSub(sub string, s *discordgo.Session, m *discordgo.Messag
 }
 
 func (r *redditHot) rmSub(sub string, s *discordgo.Session, m *discordgo.MessageCreate) {
-	subID := m.ChannelID + sub
-	if _, ok := r.subList[subID]; !ok {
-		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Le sub '%s' n'est pas stalke !", sub))
+	if _, ok := r.subList[m.ChannelID][sub]; !ok {
+		s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Warning: Sub '%s' is not being stalked.", sub))
 		return
 	}
 
-	r.subList[subID].Cancel()
-	delete(r.subList, subID)
-	s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("JA-JA-J'arrete de stalker le sub '%s' !", sub))
+	r.subList[m.ChannelID][sub].Cancel()
+	delete(r.subList[m.ChannelID], sub)
+	s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Info: Will not follow the sub '%s' anymore.", sub))
 }
 
 func (r *redditHot) Do(s *discordgo.Session, m *discordgo.MessageCreate, p []string) error {

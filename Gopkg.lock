@@ -2,10 +2,10 @@
 
 
 [[projects]]
+  branch = "master"
   name = "bitbucket.org/drannoc/golbot"
   packages = ["."]
-  revision = "cdd72a7a2e4d3fe3c58638834baf1a1b9db279c5"
-  version = "v1.0.0"
+  revision = "adbb2aba92e4abc52b9543435e3a720b9d3fa586"
 
 [[projects]]
   name = "github.com/bwmarrin/discordgo"
@@ -16,14 +16,14 @@
 [[projects]]
   name = "github.com/golang/protobuf"
   packages = ["proto"]
-  revision = "aa810b61a9c79d51363740d207bb46cf8e620ed5"
-  version = "v1.2.0"
+  revision = "6c65a5562fc06764971b7c5d05c76c75e84bdbf7"
+  version = "v1.3.2"
 
 [[projects]]
   name = "github.com/gorilla/websocket"
   packages = ["."]
-  revision = "66b9c49e59c6c48f0ffce28c2d8b8a5678502c6d"
-  version = "v1.4.0"
+  revision = "c3e18be99d19e6b3e8f1559eea2c161a665c4b6b"
+  version = "v1.4.1"
 
 [[projects]]
   name = "github.com/mitchellh/mapstructure"
@@ -61,7 +61,7 @@
   branch = "master"
   name = "github.com/turnage/graw"
   packages = ["reddit"]
-  revision = "15877a6c18d60f0ad1336c3d44fb59e95c3e6b40"
+  revision = "31585b0b727f034ebbaf9a7cc0de26f13d2289ba"
 
 [[projects]]
   name = "github.com/turnage/redditproto"
@@ -78,7 +78,7 @@
     "poly1305",
     "salsa20/salsa"
   ]
-  revision = "057139ce5d2bdbe6fe73c53679e24e9cf007f637"
+  revision = "87dc89f01550277dc22b74ffcf4cd89fa2f40f4c"
 
 [[projects]]
   branch = "master"
@@ -87,16 +87,23 @@
     "context",
     "context/ctxhttp"
   ]
-  revision = "d26f9f9a57f3fab6a695bec0d84433c2c50f8bbf"
+  revision = "da9a3fd4c5820e74b24a6cb7fb438dc9b0dd377c"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/oauth2"
   packages = [
     ".",
+    "clientcredentials",
     "internal"
   ]
-  revision = "5dab4167f31cbd76b407f1486c86b40748bc5073"
+  revision = "0f29369cfe4552d0e4bcddc57cc75f4d7e672a33"
+
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/sys"
+  packages = ["cpu"]
+  revision = "727590c5006e77ca5247972f47e877f4929fc985"
 
 [[projects]]
   name = "google.golang.org/appengine"
@@ -109,12 +116,12 @@
     "internal/urlfetch",
     "urlfetch"
   ]
-  revision = "e9657d882bb81064595ca3b56cbe2546bbabf7b1"
-  version = "v1.4.0"
+  revision = "971852bfffca25b069c31162ae8f247a3dba083b"
+  version = "v1.6.5"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "23eb593f9b474be4a5ba8fc6885715f3afe26f06a56ab1ce46e3b7159ce7107c"
+  inputs-digest = "7fbdae1f7d53354a70d1c19af6b0155208de473a3f3ef16640c761b2c83cff48"
   solver-name = "gps-cdcl"
   solver-version = 1

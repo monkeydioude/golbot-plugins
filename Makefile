@@ -3,7 +3,7 @@
 all: build test
 
 test:
-	@go test . ./pkg/alert
+	@AGENT_FILE=/tmp/golbot_test.agent go test .
 
 build:
 	@./scripts/build.sh
