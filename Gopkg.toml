@@ -7,10 +7,6 @@
   name = "github.com/monkeydioude/gophy"
 
 [[constraint]]
-  branch = "master"
-  name = "bitbucket.org/drannoc/golbot"
-
-[[constraint]]
   name = "github.com/monkeydioude/tools"
   version = "2.4.0"
 
