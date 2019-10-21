@@ -2,10 +2,10 @@
 
 
 [[projects]]
-  branch = "master"
   name = "bitbucket.org/drannoc/golbot"
   packages = ["."]
-  revision = "adbb2aba92e4abc52b9543435e3a720b9d3fa586"
+  revision = "cdd72a7a2e4d3fe3c58638834baf1a1b9db279c5"
+  version = "v1.0.0"
 
 [[projects]]
   name = "github.com/bwmarrin/discordgo"
@@ -70,6 +70,12 @@
   version = "2.1.0"
 
 [[projects]]
+  name = "go.etcd.io/bbolt"
+  packages = ["."]
+  revision = "a0458a2b35708eef59eb5f620ceb3cd1c01a824d"
+  version = "v1.3.3"
+
+[[projects]]
   branch = "master"
   name = "golang.org/x/crypto"
   packages = [
@@ -102,8 +108,11 @@
 [[projects]]
   branch = "master"
   name = "golang.org/x/sys"
-  packages = ["cpu"]
-  revision = "727590c5006e77ca5247972f47e877f4929fc985"
+  packages = [
+    "cpu",
+    "unix"
+  ]
+  revision = "3e7259c5e7c2076bb2728047a3df75adb1bad8e5"
 
 [[projects]]
   name = "google.golang.org/appengine"
@@ -122,6 +131,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "7fbdae1f7d53354a70d1c19af6b0155208de473a3f3ef16640c761b2c83cff48"
+  inputs-digest = "287f92675bf3c4e41f11cd401b0fc0cf9b7929af2f3864e3a27dfd66b2403eac"
   solver-name = "gps-cdcl"
   solver-version = 1

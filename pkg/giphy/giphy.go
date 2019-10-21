@@ -18,12 +18,14 @@ const (
 )
 
 type giphy struct {
-	gophy *gophy.Gophy
+	session *discordgo.Session
+	gophy   *gophy.Gophy
 }
 
-func AddCommand(cachePath string) *giphy {
+func AddCommand(cachePath string, session *discordgo.Session) *giphy {
 	return &giphy{
-		gophy: gophy.NewGophy(apiKey),
+		session: session,
+		gophy:   gophy.NewGophy(apiKey),
 	}
 }
 
@@ -37,7 +39,7 @@ func (g *giphy) GetName() string {
 }
 
 // Do implements golbot.Command interface
-func (g *giphy) Do(s *discordgo.Session, m *discordgo.MessageCreate, p []string) error {
+func (g *giphy) Do(m *discordgo.MessageCreate, p []string) error {
 	if len(p) < 2 {
 		return nil
 	}
@@ -60,11 +62,11 @@ func (g *giphy) Do(s *discordgo.Session, m *discordgo.MessageCreate, p []string)
 	n := int64(len(entity.Data))
 
 	if n == 0 {
-		s.ChannelMessageSend(m.ChannelID, notFoundMsg)
+		g.session.ChannelMessageSend(m.ChannelID, notFoundMsg)
 		return nil
 	}
 
-	s.ChannelMessageSend(m.ChannelID, entity.Data[tools.RandUnixNano(n)].EmbedURL)
+	g.session.ChannelMessageSend(m.ChannelID, entity.Data[tools.RandUnixNano(n)].EmbedURL)
 	return nil
 }
 
