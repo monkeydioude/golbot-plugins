@@ -75,19 +75,22 @@ func watchCallback(channelID, sub string, session *discordgo.Session) func(p *re
 	}
 }
 
-func watchSub(channelID, sub string, r *redditHot) {
+func watchSub(channelID, sub string, r *redditHot) error {
 	lsub := strings.ToLower(sub)
 	watchID := channelID + lsub
 	if _, ok := r.watchList[watchID]; ok {
-		r.session.ChannelMessageSend(channelID, fmt.Sprintf("Info: Sub '%s' is already being stalked.", sub))
-		return
+		return fmt.Errorf("Info: Sub '%s' is already being stalked", sub)
 	}
 	r.watchList[watchID] = r.hot.WatchMe(sub, watchCallback(channelID, sub, r.session))
+	return nil
 }
 
 func (r *redditHot) addSub(sub string, m *discordgo.MessageCreate) {
-	watchSub(m.ChannelID, sub, r)
-
+	err := watchSub(m.ChannelID, sub, r)
+	if err != nil {
+		r.session.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Info: Sub '%s' is already being stalked.", sub))
+		return
+	}
 	r.session.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Info: Stalking sub '%s' is now part of the keikaku.", sub))
 	r.subListByChannelID.addSubToSubList(m.ChannelID, sub)
 }
