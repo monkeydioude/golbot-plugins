@@ -15,5 +15,9 @@
   unused-packages = true
 
 [[constraint]]
-  branch = "master"
-  name = "github.com/turnage/graw"
+  branch = "feature/add-autorefresh"
+  name = "github.com/monkeydioude/graw"
+
+  [[constraint]]
+  branch = "use-fork-of-graw"
+  name = "github.com/monkeydioude/lgtR"

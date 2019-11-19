@@ -39,13 +39,19 @@
     "pkg/entity",
     "pkg/request"
   ]
-  revision = "285ede71c2950331bf31e269f739c59069b71fec"
+  revision = "82254903d9cd02ae67d17a6baf29c5ee34594286"
 
 [[projects]]
-  branch = "master"
+  branch = "feature/add-autorefresh"
+  name = "github.com/monkeydioude/graw"
+  packages = ["reddit"]
+  revision = "4d296b06ead2bfa95bbb53a4051ab573815ea881"
+
+[[projects]]
+  branch = "use-fork-of-graw"
   name = "github.com/monkeydioude/lgtR"
   packages = ["."]
-  revision = "545a77c2c0398929d213f314cdb2eb82869acd58"
+  revision = "998a304de28c93bbffbb512a08e3bb11e61e8f28"
 
 [[projects]]
   name = "github.com/monkeydioude/tools"
@@ -56,12 +62,6 @@
   ]
   revision = "9cf139acb9b440aaa5e9c8abbc0bd04bc3133e34"
   version = "2.4.0"
-
-[[projects]]
-  branch = "master"
-  name = "github.com/turnage/graw"
-  packages = ["reddit"]
-  revision = "31585b0b727f034ebbaf9a7cc0de26f13d2289ba"
 
 [[projects]]
   name = "github.com/turnage/redditproto"
@@ -84,7 +84,7 @@
     "poly1305",
     "salsa20/salsa"
   ]
-  revision = "87dc89f01550277dc22b74ffcf4cd89fa2f40f4c"
+  revision = "497ca9f6d64f9bb73048a960b4098309edcd2205"
 
 [[projects]]
   branch = "master"
@@ -93,7 +93,7 @@
     "context",
     "context/ctxhttp"
   ]
-  revision = "da9a3fd4c5820e74b24a6cb7fb438dc9b0dd377c"
+  revision = "fc4aabc6c91483155dade6fbb627cc953a723260"
 
 [[projects]]
   branch = "master"
@@ -112,7 +112,7 @@
     "cpu",
     "unix"
   ]
-  revision = "3e7259c5e7c2076bb2728047a3df75adb1bad8e5"
+  revision = "e882bf8e40c23f260d489ef820e5e8eead5e76e3"
 
 [[projects]]
   name = "google.golang.org/appengine"
@@ -131,6 +131,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "287f92675bf3c4e41f11cd401b0fc0cf9b7929af2f3864e3a27dfd66b2403eac"
+  inputs-digest = "86a5869833ffdec6987d885abff46a0af7eb82ac1d21bb291efa4adefd9bd207"
   solver-name = "gps-cdcl"
   solver-version = 1

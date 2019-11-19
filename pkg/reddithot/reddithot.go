@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/bwmarrin/discordgo"
+	"github.com/monkeydioude/graw/reddit"
 	"github.com/monkeydioude/lgtR"
-	"github.com/turnage/graw/reddit"
 )
 
 type redditHot struct {
