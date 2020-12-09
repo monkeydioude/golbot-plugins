@@ -6,6 +6,7 @@ import (
 	"strings"
 	"time"
 
+	"bitbucket.org/drannoc/golbot"
 	"github.com/bwmarrin/discordgo"
 	"github.com/monkeydioude/graw/reddit"
 	"github.com/monkeydioude/lgtR"
@@ -110,18 +111,18 @@ func (r *redditHot) rmSub(sub string, m *discordgo.MessageCreate) {
 	r.session.ChannelMessageSend(m.ChannelID, fmt.Sprintf("Info: Will not follow the sub '%s' anymore.", sub))
 }
 
-func (r *redditHot) Do(m *discordgo.MessageCreate, p []string) error {
+func (r *redditHot) Do(_ *discordgo.Session, m *discordgo.MessageCreate, p []string) golbot.KeepLooking {
 	if len(p) < 3 {
-		return nil
+		return false
 	}
 
 	funcs := r.getFunctionMap()
 	if _, ok := funcs[p[1]]; ok {
 		funcs[p[1]](p[2], m)
-		return nil
+		return false
 	}
 
-	return nil
+	return false
 }
 
 func (r *redditHot) GetHelp() string {
